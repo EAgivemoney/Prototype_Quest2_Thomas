@@ -18,15 +18,21 @@ public class Hazard : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Block"))
         {
-            if (collision.gameObject.GetComponent<BlockMovement>().isActiveBool)
+            SpriteRenderer hazardRenderer = GetComponent<SpriteRenderer>();
+            SpriteRenderer blockRenderer = collision.gameObject.GetComponent<SpriteRenderer>();
+
+            if (hazardRenderer != null & blockRenderer != null && blockRenderer.color != hazardRenderer.color)
             {
-                Destroy(collision.gameObject);
-                gameHandler.AllPlayerBlocksArrayUpdate();
-                gameHandler.DestroyedBlockUpdate();
-            }
-            else
-            {
-                Destroy(collision.gameObject);
+                if (collision.gameObject.GetComponent<BlockMovement>().isActiveBool)
+                {
+                    Destroy(collision.gameObject);
+                    gameHandler.AllPlayerBlocksArrayUpdate();
+                    gameHandler.DestroyedBlockUpdate();
+                }
+                else
+                {
+                    Destroy(collision.gameObject);
+                }
             }
         }
     }

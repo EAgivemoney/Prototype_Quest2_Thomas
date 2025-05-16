@@ -8,14 +8,25 @@ using UnityEngine;
 public class ColorChanger : MonoBehaviour
 {
     private SpriteRenderer mySpriteRenderer;
+    [SerializeField] private Color objectColor = Color.white;
 
     void Awake()
     {
         mySpriteRenderer = GetComponent<SpriteRenderer>();
+        ChangeColor(objectColor);
+
     }
 
-    private void Start()
+    public void ChangeColor(Color newColor)
     {
-
+        objectColor = newColor;
+        if (mySpriteRenderer != null)
+        {
+            mySpriteRenderer.color = objectColor;
+        }
+        else
+        {
+            Debug.LogWarning("SpriteRenderer component not found on this GameObject.");
+        }
     }
 }
